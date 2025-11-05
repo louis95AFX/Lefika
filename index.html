@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lefika Elite | Exclusive Executive Transfers & Chauffeur Services</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+<!-- Font Awesome CDN -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  integrity="sha512-Xx8hvxFl7aDhC6P6Kq2V4PZzHhYCPfMt7SGJ8cCwS1a8zjksR8pGk6pYUw1R1TtA2HcPC45K6KmlO7Ff2ZQm6g=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    
+    /* Default body style for a more sophisticated, serif-like feel (requires a proper font load for best results) */
+    html,body { height:100%; }
+    body { background: #f9fafb; color: #15202B; -webkit-font-smoothing:antialiased; font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; }
+
+    /* Custom classes for luxury theme */
+    .text-gold { color: #CC9900; }
+    .bg-gold { background: #CC9900; }
+    .hover\:bg-gold-dark:hover { background: #B38600; }
+    .border-gold { border-color: #CC9900; }
+    .hover\:text-gold-dark:hover { color: #B38600; }
+
+    .hero-bg {
+      /* Darker overlay for a premium, dramatic look */
+      background: linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('hero.jpg');
+      background-size: cover; background-position: center;
+      min-height: 70vh; /* Taller hero section */
+    }
+    
+    /* Deeper, softer card shadow */
+    .card-shadow { box-shadow: 0 15px 45px rgba(21,32,43,0.15); border-radius: 1.5rem; } /* Smoother corners */
+    
+    /* WhatsApp floating button - keep green for recognition, but make it slightly larger/more pronounced */
+    .whatsapp-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50%;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+  text-decoration: none;
+}
+.whatsapp-btn:hover {
+  background-color: #1ebe5d;
+}
+.float-bounce {
+  animation: float 2s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+  </style>
+</head>
+<body class="antialiased">
+
+  <header class="bg-white/95 backdrop-blur-sm sticky top-0 z-40 shadow-xl">
+    <div class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <img src="item1.png" alt="Lefika Elite Logo" class="h-14 w-14 object-contain"/>
+        <div>
+          <h1 class="text-2xl font-bold tracking-widest text-gold">LEFIKA ELITE</h1>
+          <p class="text-xs text-gray-700 uppercase tracking-wider">Executive Chauffeur & VIP Transfers</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-8 text-base font-medium">
+        <a href="#services" class="hover:text-gold">Services</a>
+        <a href="fleet.html" class="hover:text-gold">Our Fleet</a>
+        <a href="#quote" class="hover:text-gold">Enquire</a>
+        <a href="#contact" class="hover:text-gold">Contact</a>
+      </nav>
+
+      <div class="hidden md:block">
+        <a href="#contact" class="bg-gold hover:bg-gold-dark text-white px-6 py-3 rounded-xl shadow-lg transition duration-300 font-semibold">Reserve Now</a>
+      </div>
+
+      <button id="mobileToggle" class="md:hidden p-3 rounded-lg hover:bg-gray-100 text-2xl">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+
+    <div id="mobileNav" class="md:hidden hidden px-8 pb-4 bg-white shadow-inner">
+      <a href="#services" class="block py-2 text-lg border-b border-gray-100">Services</a>
+      <a href="#fleet" class="block py-2 text-lg border-b border-gray-100">Our Fleet</a>
+      <a href="#quote" class="block py-2 text-lg border-b border-gray-100">Enquire</a>
+      <a href="#contact" class="block py-2 text-lg">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-bg relative flex items-center">
+      <div class="max-w-7xl mx-auto px-8 py-32 flex flex-col md:flex-row items-start gap-12">
+        <div class="w-full md:w-3/5 text-white">
+          <p class="uppercase tracking-widest text-sm text-gold font-semibold mb-2">The Definition of Discretion</p>
+          <h2 class="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight">Seamless Executive Travel.</h2>
+          <p class="mt-6 text-xl text-gray-200 max-w-2xl">Lefika Elite provides **VIP airport transfers**, **discreet corporate shuttles**, and **private chauffeur services** with a focus on luxury, punctuality, and uncompromising safety.</p>
+          <div class="mt-10 flex gap-6">
+            <a href="#contact" class="px-8 py-4 bg-gold hover:bg-gold-dark rounded-xl text-white font-bold text-lg shadow-xl transition duration-300">Book Your Chauffeur</a>
+            <a href="#fleet" class="px-8 py-4 border border-white/50 rounded-xl text-white text-lg hover:bg-white/10 transition duration-300">View Our Fleet</a>
+          </div>
+
+          <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-3xl">
+            <div class="bg-white/10 p-3 rounded-xl text-center">
+              <i class="fa fa-plane fa-lg text-gold"></i>
+              <div class="text-sm font-semibold mt-1">Airport VIP</div>
+            </div>
+            <div class="bg-white/10 p-3 rounded-xl text-center">
+              <i class="fa fa-shield-alt fa-lg text-gold"></i>
+              <div class="text-sm font-semibold mt-1">Certified Discretion</div>
+            </div>
+            <div class="bg-white/10 p-3 rounded-xl text-center">
+              <i class="fa fa-clock fa-lg text-gold"></i>
+              <div class="text-sm font-semibold mt-1">24/7 Availability</div>
+            </div>
+             <div class="bg-white/10 p-3 rounded-xl text-center">
+              <i class="fa fa-road fa-lg text-gold"></i>
+              <div class="text-sm font-semibold mt-1">Exclusive Routes</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full md:w-2/5 mt-10 md:mt-0">
+          <div class="bg-white rounded-3xl p-8 card-shadow">
+            <h3 class="text-2xl font-bold text-gold">Exclusive Quote Request</h3>
+            <p class="mt-2 text-sm text-gray-700">Receive a detailed estimate for your premium transfer.</p>
+
+            <div class="mt-6 space-y-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-800">Transfer Type</label>
+                <select id="quoteType" class="mt-2 block w-full rounded-lg border-gray-300 p-3 text-lg">
+                  <option value="distance">Private Chauffeur (Per KM)</option>
+                  <option value="route">Executive Route (Fixed Price)</option>
+                </select>
+              </div>
+
+              <div id="distanceBox">
+                <label class="block text-sm font-semibold text-gray-800">Estimated Distance (km)</label>
+                <input id="distanceKm" type="number" min="1" value="50" class="mt-2 block w-full rounded-lg border-gray-300 p-3 text-lg" />
+                <label class="mt-4 block text-sm font-semibold text-gray-800">Luxury Rate per km (ZAR)</label>
+                <input id="ratePerKm" type="number" min="0" step="0.01" value="12.50" class="mt-2 block w-full rounded-lg border-gray-300 p-3 text-lg" />
+              </div>
+
+              <div id="routeBox" class="hidden">
+                <label class="block text-sm font-semibold text-gray-800">Select Exclusive Route</label>
+                <select id="routeSelect" class="mt-2 block w-full rounded-lg border-gray-300 p-3 text-lg">
+                  <option value="airport_sandton">OR Tambo ↔ Sandton — R850</option>
+                  <option value="airport_cbd">OR Tambo ↔ CBD (Executive) — R750</option>
+                  <option value="pta_airport">Pretoria (VIP) ↔ OR Tambo — R950</option>
+                </select>
+              </div>
+
+              <div class="pt-2">
+                <button id="calcQuote" class="w-full px-6 py-3 bg-gold hover:bg-gold-dark text-white font-bold rounded-lg shadow-md transition duration-300 text-lg">Calculate Elite Estimate</button>
+              </div>
+
+              <div id="quoteResult" class="mt-6 p-4 rounded-xl quote-result hidden">
+                <div class="text-base font-medium text-gray-900">Estimated Reservation Price:</div>
+                <div id="quotePrice" class="mt-1 text-3xl font-extrabold text-gold">R0.00</div>
+                <button id="sendQuote" class="mt-3 w-full px-4 py-2 border-2 border-gold text-gold rounded-lg hover:bg-gold/10 transition duration-300 font-semibold">Proceed to Reservation</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-12">
+          <p class="uppercase tracking-widest text-sm text-gold font-semibold mb-2">Our Commitments</p>
+          <h2 class="text-4xl font-bold">Uncompromising Executive Services</h2>
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="p-8 rounded-2xl card-shadow border-t-4 border-gold">
+            <i class="fa fa-plane fa-3x text-gold mb-4"></i>
+            <h3 class="text-xl font-bold">VIP Airport Transfers</h3>
+            <p class="mt-3 text-gray-700">Private, swift, and discreet transfers to and from all major airports. **Meet & Greet service** and flight monitoring included as standard.</p>
+          </div>
+          <div class="p-8 rounded-2xl card-shadow border-t-4 border-gold">
+            <i class="fa fa-building fa-3x text-gold mb-4"></i>
+            <h3 class="text-xl font-bold">Executive Corporate Chauffeur</h3>
+            <p class="mt-3 text-gray-700">Dedicated daily chauffeur services for executives and corporate roadshows. Premium invoicing and contract rates available upon request.</p>
+          </div>
+          <div class="p-8 rounded-2xl card-shadow border-t-4 border-gold">
+            <i class="fa fa-users-cog fa-3x text-gold mb-4"></i>
+            <h3 class="text-xl font-bold">Bespoke Group Charters</h3>
+            <p class="mt-3 text-gray-700">Custom, high-end transport solutions for private events, delegation movements, or specialized luxury tours. Full itinerary management.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fleet" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-12">
+          <p class="uppercase tracking-widest text-sm text-gold font-semibold mb-2">Vehicles of Distinction</p>
+          <h2 class="text-4xl font-bold">Our Elite Fleet</h2>
+          <p class="text-base text-gray-700 mt-2">Modern, luxury vehicles selected for comfort, safety, and a sophisticated presence.</p>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div class="bg-white p-8 rounded-2xl card-shadow">
+            <img src="item3.jpg" alt="Executive Sedan" class="w-full h-56 object-cover rounded-xl shadow-lg"/>
+            <h4 class="mt-6 text-xl font-bold text-gold">Executive Sedan</h4>
+            <p class="text-base text-gray-600 mt-2">Perfect for discreet individual or VIP airport transfers. Complimentary Wi-Fi and refreshments.</p>
+            <ul class="text-sm text-gray-500 mt-3 space-y-1 list-disc list-inside">
+              <li>Up to 3 Passengers</li>
+              <li>Leather Interior, Climate Control</li>
+            </ul>
+          </div>
+          <div class="bg-white p-8 rounded-2xl card-shadow">
+            <img src="item2.jpg" alt="Luxury Minivan" class="w-full h-56 object-cover rounded-xl shadow-lg"/>
+            <h4 class="mt-6 text-xl font-bold text-gold">Luxury VIP Minivan</h4>
+            <p class="text-base text-gray-600 mt-2">Superior comfort for small group executive travel or family transfers. Generous luggage capacity.</p>
+            <ul class="text-sm text-gray-500 mt-3 space-y-1 list-disc list-inside">
+              <li>Up to 7 Passengers</li>
+              <li>Privacy Tinting, Business-Class Seating</li>
+            </ul>
+          </div>
+          <div class="bg-white p-8 rounded-2xl card-shadow">
+            <img src="item6.jpg" alt="Premium Coach" class="w-full h-56 object-cover rounded-xl shadow-lg"/>
+            <h4 class="mt-6 text-xl font-bold text-gold">Premium Group Coach</h4>
+            <p class="text-base text-gray-600 mt-2">The ultimate solution for large corporate delegations and bespoke event logistics.</p>
+            <ul class="text-sm text-gray-500 mt-3 space-y-1 list-disc list-inside">
+              <li>Up to 24 Passengers</li>
+              <li>Onboard Bathroom, Multimedia System</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quote" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-5 gap-12">
+        
+        <div id="contact" class="bg-gray-50 rounded-3xl p-10 card-shadow md:col-span-3">
+          <h3 class="text-3xl font-bold text-gold">Finalize Your Reservation</h3>
+          <p class="text-base text-gray-700 mt-2">Please provide your details. A dedicated booking specialist will confirm your luxury transfer within the hour.</p>
+
+          <form id="enquiryForm" action="https://formsubmit.co/Info@LefikaElite.co.za" method="POST" class="mt-6 space-y-5">
+            <input type="hidden" name="_subject" value="New Elite Reservation Request" />
+            <input type="hidden" name="_captcha" value="false" />
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-800">Client Full Name</label>
+              <input name="name" required class="mt-2 block w-full rounded-lg border-gray-300 p-3" placeholder="Mr. / Ms. John Doe"/>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-sm font-semibold text-gray-800">Email Address</label>
+                <input name="email" type="email" required class="mt-2 block w-full rounded-lg border-gray-300 p-3" placeholder="executive@example.com"/>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-800">Phone (Discreet Contact)</label>
+                <input name="phone" class="mt-2 block w-full rounded-lg border-gray-300 p-3" placeholder="+27 XX XXX XXXX"/>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-800">Full Transfer Itinerary (Details)</label>
+              <textarea name="details" rows="5" class="mt-2 block w-full rounded-lg border-gray-300 p-3" placeholder="VIP Pickup: OR Tambo International, Gate A. Dropoff: The Saxon Hotel, Villas & Spa. Date/Time: 2026-01-15 14:30. Flight details: SA234."></textarea>
+            </div>
+
+            <input type="hidden" name="calculated_quote" id="enquiryCalculatedQuote" value="">
+
+            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+              <button type="submit" class="flex-1 px-6 py-3 bg-gold hover:bg-gold-dark text-white font-bold rounded-lg shadow-xl text-lg transition duration-300">Submit Reservation Request</button>
+              <button type="button" id="attachQuoteBtn" class="flex-1 px-6 py-3 border-2 border-gray-400 text-gray-600 rounded-lg hover:border-gold hover:text-gold transition duration-300 font-semibold">Attach Quote Estimate</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="space-y-8 md:col-span-2">
+          <div class="bg-gray-50 rounded-3xl p-8 card-shadow border-l-4 border-gold">
+            <h4 class="font-bold text-xl">24/7 Priority Contact</h4>
+            <div class="text-base text-gray-700 mt-4 space-y-2">
+              <div class="flex items-center gap-3">
+                <i class="fa fa-phone-alt text-gold"></i>
+                <div><strong>Call/WhatsApp:</strong> <span class="font-bold">+27 67 799 1211</span></div>
+              </div>
+              <div class="flex items-center gap-3">
+                <i class="fa fa-envelope text-gold"></i>
+                <div><strong>Email:</strong> info@lefikaelite.co.za</div>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500 mt-4">We guarantee an elite response time for all reservation and dispatch enquiries.</p>
+          </div>
+
+          <div class="bg-gray-50 rounded-3xl p-8 card-shadow border-l-4 border-gold">
+            <h4 class="font-bold text-xl">Our Elite Promise</h4>
+            <p class="text-base text-gray-700 mt-3">Every journey is managed with **utmost discretion** and a focus on your schedule. Immaculate, sanitized vehicles and professionally trained chauffeurs ensure a superior travel experience.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-400">
+      <div class="max-w-7xl mx-auto px-8 py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div>
+          <h5 class="font-bold text-white text-lg border-b border-gold pb-2">Lefika Elite</h5>
+          <p class="text-sm mt-4">The premier choice for executive and VIP transfers across the region. Excellence in every mile.</p>
+          <div class="mt-4 text-xs text-gray-500">© <span id="year"></span> Lefika Elite. All rights reserved.</div>
+        </div>
+
+        <div>
+          <h6 class="font-bold text-white text-lg border-b border-gold pb-2">Quick Access</h6>
+          <div class="mt-4 text-sm space-y-2">
+            <a href="#services" class="block hover:text-gold transition duration-300">Our Services</a>
+            <a href="#fleet" class="block hover:text-gold transition duration-300">Elite Fleet</a>
+            <a href="#quote" class="block hover:text-gold transition duration-300">Reservation</a>
+          </div>
+        </div>
+
+        <div>
+          <h6 class="font-bold text-white text-lg border-b border-gold pb-2">Contact</h6>
+          <div class="mt-4 text-sm space-y-2">
+            <p>24/7 Dispatch</p>
+            <p>Info@LefikaElite.co.za</p>
+            <p>Tel: +27 67 799 1211</p>
+          </div>
+        </div>
+
+        <div>
+          <h6 class="font-bold text-white text-lg border-b border-gold pb-2">Follow Us</h6>
+          <div class="mt-4 flex gap-4 text-xl">
+            <a href="#" class="text-gray-400 hover:text-gold transition duration-300"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-gray-400 hover:text-gold transition duration-300"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-gold transition duration-300"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <a id="whatsappFloat" class="whatsapp-btn float-bounce" target="_blank"
+   href="https://wa.me/27677991211?text=Greetings%20Lefika%20Elite%2C%20I%20wish%20to%20reserve%20a%20private%20chauffeur.">
+  <i class="fab fa-whatsapp fa-2x"></i>
+</a>
+
+
+  <script>
+    // Standard JS logic (slightly updated with better names)
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    document.getElementById('mobileToggle').addEventListener('click', function(){
+      const nav = document.getElementById('mobileNav');
+      nav.classList.toggle('hidden');
+    });
+
+    // Quote logic elements
+    const quoteType = document.getElementById('quoteType');
+    const distanceBox = document.getElementById('distanceBox');
+    const routeBox = document.getElementById('routeBox');
+    const calcQuote = document.getElementById('calcQuote');
+    const sendQuote = document.getElementById('sendQuote');
+    const quoteResult = document.getElementById('quoteResult');
+    const quotePrice = document.getElementById('quotePrice');
+    const enquiryCalculatedQuote = document.getElementById('enquiryCalculatedQuote');
+    const attachQuoteBtn = document.getElementById('attachQuoteBtn');
+
+    // route pricing map (updated to reflect luxury pricing)
+    const routePrices = {
+      "airport_sandton": 850,
+      "airport_cbd": 750,
+      "pta_airport": 950
+    };
+
+    quoteType.addEventListener('change', function(){
+      if (quoteType.value === 'distance') {
+        distanceBox.classList.remove('hidden');
+        routeBox.classList.add('hidden');
+      } else {
+        distanceBox.classList.add('hidden');
+        routeBox.classList.remove('hidden');
+      }
+      quoteResult.classList.add('hidden');
+    });
+
+    function formatZAR(num) {
+      return 'R' + Number(num).toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    calcQuote.addEventListener('click', function(){
+      let price = 0;
+      if (quoteType.value === 'distance') {
+        const km = parseFloat(document.getElementById('distanceKm').value) || 0;
+        const rate = parseFloat(document.getElementById('ratePerKm').value) || 0;
+        price = km * rate;
+      } else {
+        const route = document.getElementById('routeSelect').value;
+        price = routePrices[route] || 0;
+      }
+      quotePrice.innerText = formatZAR(price);
+      enquiryCalculatedQuote.value = price.toFixed(2);
+      quoteResult.classList.remove('hidden');
+    });
+
+    sendQuote.addEventListener('click', function(){
+      const current = enquiryCalculatedQuote.value;
+      if (!current || Number(current) === 0) {
+        calcQuote.click();
+      }
+      document.querySelector('#contact').scrollIntoView({behavior:'smooth'});
+      attachQuoteBtn.focus();
+    });
+
+    attachQuoteBtn.addEventListener('click', function(){
+      if (!enquiryCalculatedQuote.value || Number(enquiryCalculatedQuote.value) === 0) {
+        alert('Please calculate an estimate first (click "Calculate Elite Estimate").');
+        return;
+      }
+      alert('The latest calculated quote of ' + formatZAR(enquiryCalculatedQuote.value) + ' has been securely attached to the Reservation Request form. Please complete your details and submit.');
+    });
+
+    // Smooth anchor scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) target.scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+  </script>
+</body>
+</html>
