@@ -6,7 +6,6 @@
   <title>Lefika Elite | Exclusive Executive Transfers & Chauffeur Services</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-<!-- Font Awesome CDN -->
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -141,18 +140,27 @@
               <div>
                 <label class="block text-sm font-semibold text-gray-800">Transfer Type</label>
                 <select id="quoteType" class="mt-2 block w-full rounded-lg border-gray-300 p-3 text-lg">
-                  <option value="distance">Private Chauffeur (Per KM)</option>
+                  <option value="day">Dedicated Chauffeur (Per Day)</option>
                   <option value="route">Executive Route (Fixed Price)</option>
                 </select>
               </div>
 
-              <div id="distanceBox">
-                <label class="block text-sm font-semibold text-gray-800">Estimated Distance (km)</label>
-                <input id="distanceKm" type="number" min="1" value="50" class="mt-2 block w-full rounded-lg border-gray-300 p-3 text-lg" />
-                <label class="mt-4 block text-sm font-semibold text-gray-800">Luxury Rate per km (ZAR)</label>
-                <input id="ratePerKm" type="number" min="0" step="0.01" value="12.50" class="mt-2 block w-full rounded-lg border-gray-300 p-3 text-lg" />
-              </div>
+              <div id="dayBox">
+                <label class="block text-sm font-semibold text-gray-800">Select Vehicle Model</label>
+                <select id="vehicleSelect" class="mt-2 block w-full rounded-lg border-gray-300 p-3 text-lg">
+                  </select>
+                
+                <label class="mt-4 block text-sm font-semibold text-gray-800">Number of Days</label>
+                <input id="numDays" type="number" min="1" value="1" class="mt-2 block w-full rounded-lg border-gray-300 p-3 text-lg" />
+                
+                <div class="mt-4 flex items-center">
+                  <input id="selfDriveCheckbox" type="checkbox" class="h-5 w-5 rounded border-gray-300 text-gold focus:ring-gold" />
+                  <label for="selfDriveCheckbox" class="ml-2 block text-sm font-semibold text-gray-800">Self-Drive (+R600 per day)</label>
+                </div>
 
+                <label class="mt-4 block text-sm font-semibold text-gray-800">Effective Daily Rate (ZAR)</label>
+                <input id="ratePerDayDisplay" type="text" readonly value="R0.00" class="mt-2 block w-full rounded-lg border-gray-300 p-3 text-lg bg-gray-100 font-bold" />
+                <input id="ratePerDay" type="hidden" value="0.00" /> </div>
               <div id="routeBox" class="hidden">
                 <label class="block text-sm font-semibold text-gray-800">Select Exclusive Route</label>
                 <select id="routeSelect" class="mt-2 block w-full rounded-lg border-gray-300 p-3 text-lg">
@@ -273,10 +281,11 @@
 
             <div>
               <label class="block text-sm font-semibold text-gray-800">Full Transfer Itinerary (Details)</label>
-              <textarea name="details" rows="5" class="mt-2 block w-full rounded-lg border-gray-300 p-3" placeholder="VIP Pickup: OR Tambo International, Gate A. Dropoff: The Saxon Hotel, Villas & Spa. Date/Time: 2026-01-15 14:30. Flight details: SA234."></textarea>
+              <textarea name="details" rows="5" class="mt-2 block w-full rounded-lg border-gray-300 p-3" placeholder="Dedicated Chauffeur for 3 days starting 2026-01-15. Pickup: The Saxon Hotel. Itinerary details: Daily meetings in Sandton and Pretoria CBD."></textarea>
             </div>
 
             <input type="hidden" name="calculated_quote" id="enquiryCalculatedQuote" value="">
+            <input type="hidden" name="selected_vehicle_and_option" id="enquiryVehicleDetails" value="">
 
             <div class="flex flex-col sm:flex-row gap-4 pt-4">
               <button type="submit" class="flex-1 px-6 py-3 bg-gold hover:bg-gold-dark text-white font-bold rounded-lg shadow-xl text-lg transition duration-300">Submit Reservation Request</button>
@@ -362,51 +371,121 @@
       nav.classList.toggle('hidden');
     });
 
+    // --- Pricing Data and Logic ---
+
+    const vehicleRates = {
+        'Hyundai Staria': 3500,
+        'Vw T6 Kombi': 3300,
+        'Mercedes Benz V class': 6500,
+        'Mercedes Benz Vito': 3500,
+        'Mercedes Benz C class': 4500,
+        'Bmw 3 Series': 4500,
+        'Bmw X5': 6500,
+        'Bmw X3': 6000,
+        'Old shape C class Mercedes Benz': 2500
+    };
+    const selfDriveSurcharge = 600;
+
     // Quote logic elements
     const quoteType = document.getElementById('quoteType');
-    const distanceBox = document.getElementById('distanceBox');
+    const dayBox = document.getElementById('dayBox');
     const routeBox = document.getElementById('routeBox');
+    const vehicleSelect = document.getElementById('vehicleSelect');
+    const selfDriveCheckbox = document.getElementById('selfDriveCheckbox');
+    const numDays = document.getElementById('numDays');
+    const ratePerDayDisplay = document.getElementById('ratePerDayDisplay');
+    const ratePerDay = document.getElementById('ratePerDay'); // Hidden field for calculation
     const calcQuote = document.getElementById('calcQuote');
     const sendQuote = document.getElementById('sendQuote');
     const quoteResult = document.getElementById('quoteResult');
     const quotePrice = document.getElementById('quotePrice');
     const enquiryCalculatedQuote = document.getElementById('enquiryCalculatedQuote');
+    const enquiryVehicleDetails = document.getElementById('enquiryVehicleDetails');
     const attachQuoteBtn = document.getElementById('attachQuoteBtn');
 
-    // route pricing map (updated to reflect luxury pricing)
+    // route pricing map
     const routePrices = {
       "airport_sandton": 850,
       "airport_cbd": 750,
       "pta_airport": 950
     };
 
+    function formatZAR(num) {
+      return 'R' + Number(num).toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // Function to populate the vehicle dropdown
+    function populateVehicleSelect() {
+        vehicleSelect.innerHTML = '';
+        for (const [vehicle, rate] of Object.entries(vehicleRates)) {
+            const option = document.createElement('option');
+            option.value = vehicle;
+            option.textContent = `${vehicle} - ${formatZAR(rate)} / day`;
+            vehicleSelect.appendChild(option);
+        }
+    }
+    
+    // Function to calculate and update the displayed daily rate
+    function updateDailyRateDisplay() {
+        const selectedVehicle = vehicleSelect.value;
+        const baseRate = vehicleRates[selectedVehicle] || 0;
+        const isSelfDrive = selfDriveCheckbox.checked;
+
+        let effectiveRate = baseRate;
+        if (isSelfDrive) {
+            effectiveRate += selfDriveSurcharge;
+        }
+
+        ratePerDay.value = effectiveRate.toFixed(2); // Store for calculation
+        ratePerDayDisplay.value = formatZAR(effectiveRate); // Display formatted value
+    }
+
+    // Initialize vehicle list and rate display
+    populateVehicleSelect();
+    updateDailyRateDisplay();
+
+    // Event listeners to update the rate display whenever vehicle or self-drive changes
+    vehicleSelect.addEventListener('change', updateDailyRateDisplay);
+    selfDriveCheckbox.addEventListener('change', updateDailyRateDisplay);
+
+
+    // Toggle between Day and Route boxes
     quoteType.addEventListener('change', function(){
-      if (quoteType.value === 'distance') {
-        distanceBox.classList.remove('hidden');
+      if (quoteType.value === 'day') {
+        dayBox.classList.remove('hidden');
         routeBox.classList.add('hidden');
       } else {
-        distanceBox.classList.add('hidden');
+        dayBox.classList.add('hidden');
         routeBox.classList.remove('hidden');
       }
       quoteResult.classList.add('hidden');
     });
 
-    function formatZAR(num) {
-      return 'R' + Number(num).toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    }
-
+    // Main Calculation Logic
     calcQuote.addEventListener('click', function(){
       let price = 0;
-      if (quoteType.value === 'distance') {
-        const km = parseFloat(document.getElementById('distanceKm').value) || 0;
-        const rate = parseFloat(document.getElementById('ratePerKm').value) || 0;
-        price = km * rate;
+      let vehicleText = '';
+      
+      if (quoteType.value === 'day') {
+        const days = parseFloat(numDays.value) || 0;
+        const rate = parseFloat(ratePerDay.value) || 0;
+        price = days * rate;
+
+        const selectedVehicle = vehicleSelect.value;
+        const isSelfDrive = selfDriveCheckbox.checked ? ' (Self-Drive)' : ' (Chauffeur-Driven)';
+        const rateType = vehicleRates[selectedVehicle] ? formatZAR(vehicleRates[selectedVehicle]) : 'Rate Unavailable';
+        
+        vehicleText = `${selectedVehicle} @ ${rateType} x ${days} day(s)${isSelfDrive}. Total: ${formatZAR(price)}`;
+
       } else {
         const route = document.getElementById('routeSelect').value;
         price = routePrices[route] || 0;
+        vehicleText = `Fixed Route: ${route} - ${formatZAR(price)}`;
       }
+      
       quotePrice.innerText = formatZAR(price);
       enquiryCalculatedQuote.value = price.toFixed(2);
+      enquiryVehicleDetails.value = vehicleText; // Store detailed text for the form
       quoteResult.classList.remove('hidden');
     });
 
@@ -424,7 +503,8 @@
         alert('Please calculate an estimate first (click "Calculate Elite Estimate").');
         return;
       }
-      alert('The latest calculated quote of ' + formatZAR(enquiryCalculatedQuote.value) + ' has been securely attached to the Reservation Request form. Please complete your details and submit.');
+      const vehicleDetails = enquiryVehicleDetails.value || 'No vehicle/route selected.';
+      alert('The latest calculated quote of ' + formatZAR(enquiryCalculatedQuote.value) + ' for ' + vehicleDetails + ' has been securely attached to the Reservation Request form. Please complete your details and submit.');
     });
 
     // Smooth anchor scrolling
