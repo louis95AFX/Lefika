@@ -6,6 +6,8 @@
   <title>Lefika Elite | Exclusive Executive Transfers & Chauffeur Services</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://js.yoco.com/sdk/v1/yoco-sdk-web.js"></script>
+
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -177,6 +179,11 @@
               <div id="quoteResult" class="mt-6 p-4 rounded-xl quote-result hidden">
                 <div class="text-base font-medium text-gray-900">Estimated Reservation Price:</div>
                 <div id="quotePrice" class="mt-1 text-3xl font-extrabold text-gold">R0.00</div>
+                
+                <button id="yocoPayBtn" class="mt-4 w-full px-4 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 font-bold flex items-center justify-center gap-2">
+                    <i class="fa fa-credit-card"></i> Pay Now (via Yoco)
+                </button>
+
                 <button id="sendQuote" class="mt-3 w-full px-4 py-2 border-2 border-gold text-gold rounded-lg hover:bg-gold/10 transition duration-300 font-semibold">Proceed to Reservation</button>
               </div>
             </div>
@@ -402,7 +409,12 @@
     const enquiryCalculatedQuote = document.getElementById('enquiryCalculatedQuote');
     const enquiryVehicleDetails = document.getElementById('enquiryVehicleDetails');
     const attachQuoteBtn = document.getElementById('attachQuoteBtn');
+    const yocoPayBtn = document.getElementById('yocoPayBtn'); // New Yoco Button
 
+    // Yoco Configuration 
+    // !!! IMPORTANT: This is a TEST key. Replace it with your LIVE Public Key for production.
+    const YOCO_PUBLIC_KEY = 'pk_test_ed3c54a6gOol69qa7f45'; 
+    
     // route pricing map
     const routePrices = {
       "airport_sandton": 850,
@@ -447,7 +459,7 @@
     // Event listeners to update the rate display whenever vehicle or self-drive changes
     vehicleSelect.addEventListener('change', updateDailyRateDisplay);
     selfDriveCheckbox.addEventListener('change', updateDailyRateDisplay);
-
+    numDays.addEventListener('change', updateDailyRateDisplay); // Clear result if days change
 
     // Toggle between Day and Route boxes
     quoteType.addEventListener('change', function(){
@@ -486,8 +498,62 @@
       quotePrice.innerText = formatZAR(price);
       enquiryCalculatedQuote.value = price.toFixed(2);
       enquiryVehicleDetails.value = vehicleText; // Store detailed text for the form
+      
+      // Show Yoco button if the price is > R2.00 (Yoco's minimum)
+      if (price >= 2.00) {
+         yocoPayBtn.classList.remove('hidden');
+      } else {
+         yocoPayBtn.classList.add('hidden');
+      }
+
       quoteResult.classList.remove('hidden');
     });
+
+    // Yoco Payment Handler
+    yocoPayBtn.addEventListener('click', handleYocoPayment);
+
+    function handleYocoPayment() {
+        const amount = parseFloat(enquiryCalculatedQuote.value) * 100; // Convert ZAR to Cents
+        const description = enquiryVehicleDetails.value || 'Lefika Elite Reservation';
+        const clientEmail = document.querySelector('input[name="email"]').value;
+        const clientName = document.querySelector('input[name="name"]').value;
+        
+        if (amount <= 200 || isNaN(amount)) { // R2.00 in cents
+            alert('The payment amount must be R2.00 or more.');
+            return;
+        }
+
+        const yoco = new YocoSDK({
+            publicKey: YOCO_PUBLIC_KEY 
+        });
+
+        yoco.showPopup({
+            amountInCents: amount,
+            currency: 'ZAR',
+            name: 'Lefika Elite',
+            description: description,
+            // Include client details if available
+            customer: {
+                name: clientName,
+                email: clientEmail
+            },
+            callback: function (result) {
+                // *** IMPORTANT SECURITY NOTE: ***
+                // This callback receives a payment token only. 
+                // You must send this token to your secure backend to complete the charge.
+                if (result.error) {
+                    alert("Payment Error: " + result.error.message + "\n\nSee console for details.");
+                    console.error("Yoco Error:", result.error);
+                } else if (result.id) {
+                    alert("Payment initiated! Yoco Token received: " + result.id + ". \n\nNOTE: You need a secure server to finalize the charge with Yoco's API.");
+                    // In a real application, you would submit the result.id to your server here 
+                    // and then redirect the user to a confirmation page.
+                } else {
+                    alert("Payment was cancelled or failed.");
+                }
+            }
+        });
+    }
 
     sendQuote.addEventListener('click', function(){
       const current = enquiryCalculatedQuote.value;
